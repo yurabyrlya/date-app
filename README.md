@@ -1,5 +1,5 @@
 
-To run the application in  you need run these commands 
+To run the application localy you need run these commands 
 
 
  use `docker-compose` to run the app with `docker`, so you can run these commands:
