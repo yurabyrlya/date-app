@@ -14,7 +14,7 @@ Run this commands inside
 ```bash
 composer install
 npm install
-npm dev 
+npm run dev 
 ```
 
 
