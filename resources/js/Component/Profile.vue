@@ -1,77 +1,118 @@
 <template>
-  <div class="container">
-    <div class="page-content page-container mt-5" >
+  <div class="container" id="profile">
+    <div class="page-content page-container mt-5">
       <div class="padding">
         <div class="row">
-          <div class="col-md-6 m-auto">
-            <div
-              class="alert"
-              :class="alertType"
-              role="alert">
-              {{message}}
-            </div>
-            <div class="card">
-              <h6 class="text-center">Filters by age: from - to</h6>
-              <form class="form-inline p-3" @submit.prevent>
-                <div class="form-group mx-sm-3 mb-2">
-                  <label for="ageFrom" class="sr-only">from</label>
-                  <input type="number"  v-model="age.from" class="form-control" id="ageFrom" placeholder="18" >
+          <section
+              class="col-md-12 vh-100"
+              style="background-color: #eee;"
+          >
+            <div class="container py-5 h-100">
+              <div class="row justify-content-center">
+                <div
+                    class="alert col-xl-4"
+                    :class="alertType"
+                    role="alert"
+                >
+                  {{message}}
                 </div>
-                <div class="form-group mx-sm-3 mb-2">
-                  <label for="ageTo" class="sr-only">Age To</label>
-                  <input type="number" v-model="age.to" class="form-control" id="ageTo" placeholder="45">
-                </div>
-                <button type="submit" @click.prevent="getRandomProfile" class="btn btn-primary mb-2 m-auto">Update</button>
-              </form>
-            </div>
-            <div class="card" v-if="notFound === false">
-              <div class="card-header text-center"><h2>Profile</h2></div>
-              <div class="py-5 h-100">
-                <div class="row d-flex  h-100">
-                  <div class="col col-md-9 col-lg-7 col-xl-5 ml-4">
-                    <div class="card" style="border-radius: 15px;">
-                      <div class="card-body p-4">
-                        <div class="d-flex text-black">
-                          <div class="flex-shrink-0">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1250/1250689.png"
-                                 alt="Generic placeholder image" class="img-fluid"
-                                 style="width: 180px; border-radius: 10px;">
-                          </div>
-                          <div class="flex-grow-1 ms-3 ml-5">
-                            <h5 class="mb-1">{{profile.name}}</h5>
-                            <p class="mb-2 pb-1" style="color: #2b2a2a;">{{profile.gender}}</p>
-                            <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
-                                 style="background-color: #efefef;">
-                              <div>
-                                <p class="small text-muted mb-1">Age</p>
-                                <p class="mb-0">{{profile.age}}</p>
-                              </div>
-                              <div class="px-3">
-                                <p class="small text-muted mb-1">Followers</p>
-                                <p class="mb-0">976</p>
-                              </div>
-                              <div>
-                                <p class="small text-muted mb-1">Rating</p>
-                                <p class="mb-0">8.5</p>
-                              </div>
-                            </div>
-                            <div class="d-flex pt-1">
-                              <button
-                                  @click="next('NO')"
-                                  type="button" class="btn btn-outline-primary me-1 flex-grow-1">Skip</button>
-                              <button
-                                  @click="next('YES')"
-                                  type="button" class="btn ml-2 btn-danger flex-grow-1">Like</button>
-                            </div>
-                          </div>
-                        </div>
+              </div>
+              <div class="row d-flex justify-content-center h-100">
+                <div class="col-md-12 col-xl-4 " v-if="!notFound">
+                  <div class="card" style="border-radius: 15px;">
+                    <div class="card-body text-center">
+                      <div class="mt-3 mb-4">
+                        <img :src="profile.img"
+                             class="rounded-circle img-fluid profile-img"  />
+                      </div>
+                      <div class="mt-5 mb-3">
+                        <h4 class="mb-2">{{profile.name}}, {{profile.age}} </h4>
                       </div>
                     </div>
+                  </div>
+                  <div class="mt-4 pb-2 text-center">
+                    <button
+                      @click="next('YES')"
+                      type="button"
+                      class="btn btn-lg btn-outline-danger btn-floating mr-2"
+                    >
+                      <i class="bi bi-emoji-heart-eyes"></i>
+                    </button>
+                    <button
+                      @click="next('NO')"
+                      type="button"
+                      class="btn btn-lg btn-outline-secondary btn-floating ml-2"
+                    >
+                      <i class="bi bi-x-circle"></i>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <a
+      id="open-filter"
+      class="btn btn-light"
+      data-bs-toggle="offcanvas"
+      href="#offcanvas"
+      role="button"
+      aria-controls="offcanvas"
+    >
+      <i class="bi bi-arrow-right-square"></i>
+    </a>
+    <div
+      class="offcanvas offcanvas-start"
+      tabindex="-1"
+      id="offcanvas"
+      aria-labelledby="offcanvasLabel"
+    >
+      <div class="offcanvas-header">
+        <h5
+          class="offcanvas-title"
+          id="offcanvasLabel"
+        >Filters</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="col-md-11 m-auto">
+          <h6 class="text-center">Age range</h6>
+          <form class="form-inline p-3" @submit.prevent>
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="ageFrom" class="sr-only">From:</label>
+                <input
+                  type="number"
+                  v-model="age.from"
+                  class="form-control"
+                  id="ageFrom"
+                  placeholder="18">
+              </div>
+              <div class="form-group mx-sm-3 mb-2" style="text-align: left">
+                <label for="ageTo" class="sr-only">To:</label>
+                <input
+                  type="number"
+                  v-model="age.to"
+                  class="form-control"
+                  id="ageTo"
+                  placeholder="45"
+                >
+              </div>
+              <div class="form-group text-center mt-5">
+                <button
+                    type="submit"
+                    @click.prevent="getRandomProfile"
+                    class="btn btn-primary mb-2 m-auto"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
         </div>
       </div>
     </div>
@@ -136,6 +177,9 @@ export default {
             this.notFound = false;
             this.alertType = 'alert-primary';
             this.profile  = response.data
+            let randInt = Math.floor(Math.random() * 4);
+            if (randInt === 0) randInt = 1;
+            this.profile.img = 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava'+randInt +'-bg.webp'
           })
     }
   },

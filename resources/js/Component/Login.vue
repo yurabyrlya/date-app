@@ -2,19 +2,20 @@
   <div id="login" class="flex">
       <div class="page-content page-container" id="page-content">
         <div class="padding">
-          <div class="row m-auto">
-            <div class="col-4">
+          <div class="row m-auto mb-5">
+            <div class="col-12 text-center mb-5">
               <button
                   @click="generate"
                   type="submit"
-                  class="btn btn-danger">Create new user</button>
+                  class="btn btn-danger">Generate user</button>
             </div>
-            <div class="col-6">
-              <table class="table">
+            <div class="text-center flex justify-content-center">
+              <table class="table" v-if="newUser.name" >
                 <thead>
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col">Gender</th>
+                  <th scope="col">Age</th>
                   <th scope="col">Email</th>
                   <th scope="col">Password</th>
                 </tr>
@@ -23,6 +24,7 @@
                 <tr>
                   <td>{{newUser.name}}</td>
                   <td>{{newUser.gender}}</td>
+                  <td>{{newUser.age}}</td>
                   <td>{{newUser.email}}</td>
                   <td>{{newUser.password}}</td>
                 </tr>
@@ -71,7 +73,7 @@
                     <button
                         @click="login"
                         type="submit"
-                        class="btn btn-primary">Let's date</button>
+                        class="btn btn-primary mt-5">Let's date</button>
                   </form>
                 </div>
               </div>

@@ -6,3 +6,5 @@
 node_modules
 package-lock.json
 composer.lock
+public/css/app.css
+public/js/main.js
