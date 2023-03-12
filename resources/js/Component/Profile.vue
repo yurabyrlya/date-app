@@ -155,7 +155,7 @@ export default {
             this.alertType = 'alert-primary';
             if (response.data.match === 'Yes') {
               this.message = 'Match';
-            }else {
+            } else {
               this.getRandomProfile();
             }
 

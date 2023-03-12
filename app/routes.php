@@ -66,7 +66,7 @@ return function (App $app) {
         $data = json_decode($request->getBody()->getContents(), true);
         $jwt = $data['token'];
 
-        $user= User::Auth($app->getContainer(), $jwt);
+        $user = User::Auth($app->getContainer(), $jwt);
 
         $db = $this->get('connection');
         $profile = $db->table('users')->find($data['profile_id']);

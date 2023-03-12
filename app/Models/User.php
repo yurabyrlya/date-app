@@ -87,7 +87,7 @@ class User
        if (!isset($credentials['email']) || !isset($credentials['password'])){
            return [
                'message' =>'Missing required credentials',
-               'status' => 404,
+               'status' => 401,
            ];
         }
         $user = $connection
@@ -102,7 +102,7 @@ class User
         if (!$user) {
           return [
               'message' =>'invalid username or password',
-              'status' => 404,
+              'status' => 401,
           ];
         }
         $iat = time();
