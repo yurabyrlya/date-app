@@ -24,7 +24,7 @@ return function (Container $container) {
             ],
             'connection' => [
                 'driver' => 'mysql',
-                'host' => 'date-app_db_1',
+                'host' => 'date-app-db-1',
                 'database' => 'db',
                 'username' => 'user',
                 'password' => 'secret',

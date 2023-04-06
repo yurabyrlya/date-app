@@ -1,9 +1,11 @@
-version: '3.7'
+version: '3.8'
 
 volumes:
     logs:
         driver: local
     my-db:
+    my-files:
+    mysql-data:
 services:
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
@@ -34,6 +36,7 @@ services:
             # Where our data will be persisted
         volumes:
             - my-db:/var/lib/mysql
+            - my-files:/var/lib/mysql-files
     app:
         container_name: date-app
         build:
@@ -48,3 +51,4 @@ services:
         volumes:
             - .:/var/www
             - logs:/var/www/logs
+            - mysql-data:/var/lib/mysql-files
